@@ -5,18 +5,18 @@ from flask import Flask, request, jsonify
 user_data = [
     {
         "id": "1",
-        "name": "John Doe",
+        "name": "John Doe 1",
         "email": "john.doe1@email.com"
     },
     {
         "id": "2",
         "name": "John Doe 2",
-        "email": "john.doe3@email.com"
+        "email": "john.doe2@email.com"
     },
     {
         "id": "3",
-        "name": "John Doe 2",
-        "email": "john.doe2@email.com"
+        "name": "John Doe 3",
+        "email": "john.doe3@email.com"
     }
 ]
 
@@ -44,18 +44,15 @@ def create_user_data():
 
 
 @app.route("/update-user/<user_id>", methods=["PUT"])
-def create_user_data(user_id):
+def update_user_data(user_id):
     payload = request.get_json()
+    
     for user in user_data:
-            if user["id"] == user_id:
-                index = user_data.index(user)
-                user_data[index] = payload
-                return jsonify({"message": "User Updated"}), 200
-                
+        if user["id"] == user_id:
+            user.update(payload)
+            return jsonify({"message": "User Updated"}), 200
+        
     return jsonify({"error": "User not found"}), 404
-
-
-
     
 
 if __name__ == "__main__":
