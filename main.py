@@ -40,7 +40,7 @@ def get_user_data():
 def create_user_data():
     payload = request.get_json()
     user_data.append(payload)
-    return jsonify({"message": "User Updated"}), 201
+    return jsonify({"message": "User Created"}), 201
 
 
 @app.route("/update-user/<user_id>", methods=["PUT"])
