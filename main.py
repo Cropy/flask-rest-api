@@ -24,7 +24,7 @@ user_data = [
 app = Flask(__name__)
 
 
-@app.route("/get-user")
+@app.route("/get-user", methods=["GET"])
 def get_user_data():
     user_id = request.args.get("id") #id query string param, optional
     if user_id:
@@ -35,6 +35,12 @@ def get_user_data():
     
     return jsonify(user_data), 200 
 
+
+@app.route("/create-user", methods=["POST"])
+def create_user_data():
+    payload = request.get_json()
+    user_data.append(payload)
+    return jsonify("User Created!"), 201
 
 
 
