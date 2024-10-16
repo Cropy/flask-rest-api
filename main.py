@@ -40,7 +40,19 @@ def get_user_data():
 def create_user_data():
     payload = request.get_json()
     user_data.append(payload)
-    return jsonify("User Created!"), 201
+    return jsonify({"message": "User Updated"}), 201
+
+
+@app.route("/update-user/<user_id>", methods=["PUT"])
+def create_user_data(user_id):
+    payload = request.get_json()
+    for user in user_data:
+            if user["id"] == user_id:
+                index = user_data.index(user)
+                user_data[index] = payload
+                return jsonify({"message": "User Updated"}), 200
+                
+    return jsonify({"error": "User not found"}), 404
 
 
 
