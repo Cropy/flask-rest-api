@@ -1,2 +1,2 @@
 # flask-rest-api
- flask rest api with jwt auth
+ Flask REST API with JWT auth and SQLite DB
