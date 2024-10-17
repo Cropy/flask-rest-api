@@ -24,7 +24,7 @@ def get_user_data():
 @app.route("/create-user", methods=["POST"])
 def create_user_data():
     payload = request.get_json()
-    new_user = User(name = payload['name'], email = payload['email'])
+    new_user = User(name = payload["name"], email = payload["email"])
     db.session.add(new_user)
     db.session.commit()
     return jsonify({"message": "User Created"}), 201
@@ -39,7 +39,7 @@ def update_user_data(user_id):
         user.email = payload["email"]
         db.session.commit()
         return jsonify({"message": "User Updated"}), 200
-    return jsonify({"error": "User not found"}), 
+    return jsonify({"error": "User not found"}), 404 
 
 
 @app.route("/delete-user/<user_id>", methods=["DELETE"])
