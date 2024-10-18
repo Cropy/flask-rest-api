@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from models import db, User
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import datetime
@@ -14,7 +14,6 @@ db.init_app(app)
 jwt = JWTManager(app)
 
 def create_tables():
-    db.drop_all()
     db.create_all()
     if not User.query.filter_by(email = "admin@example.com").first():
         initial_user = User(name = "Admin", email = "admin@example.com") # creates an initial user, used to generate tokens
@@ -22,6 +21,13 @@ def create_tables():
         db.session.commit()
 
 
+@app.route("/")
+def render_db_table():
+    users = User.query.all()
+    return render_template('db_table.html', users = users) 
+
+
+# send {"name": "Admin", "email": "admin@example.com"} in payload to generate tokens
 @app.route("/auth-token", methods=["POST"])
 def generate_token():
     payload = request.get_json()

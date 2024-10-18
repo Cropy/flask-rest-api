@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Users List</title>
+    <script type = "text/javascript">
+        function refreshPage() {
+            location.reload();
+        }
+    </script>
+</head>
+<body>
+    <h1>Users List</h1>
+    <button onclick = "refreshPage()">Refresh</button>
+    <table border = "1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
