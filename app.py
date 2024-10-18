@@ -14,7 +14,6 @@ db.init_app(app)
 jwt = JWTManager(app)
 
 def create_tables():
-    db.drop_all()
     db.create_all()
     if not User.query.filter_by(email = "admin@example.com").first():
         initial_user = User(name = "Admin", email = "admin@example.com") # creates an initial user, used to generate tokens
